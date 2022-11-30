@@ -11,9 +11,6 @@
   -webkit-box-orient: vertical;
   display: -webkit-box;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 130%;
-  color: #2d2d2d;
   margin-bottom: 10px;
   transition: color 0.36s ease-in-out;
 }
@@ -28,9 +25,7 @@
 
 .linkAuthor {
   position: relative;
-  font-size: 12px;
-  line-height: 14px;
-  color: #cc6633;
+  overflow: hidden;
   transition: color 0.36s ease-in-out;
 }
 

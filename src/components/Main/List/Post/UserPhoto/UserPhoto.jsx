@@ -4,7 +4,7 @@ import notphoto from './img/notphoto.jpg';
 
 
 export const UserPhoto = (props) => {
-  console.log(style);
+  console.log();
   return (
     <img className={style.img} src={notphoto} alt="title" />
   );
