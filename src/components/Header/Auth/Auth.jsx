@@ -1,46 +1,20 @@
 import React from 'react';
-import {useEffect, useState} from 'react';
-import {URL_API} from '../../../api/const';
+import {useState} from 'react';
 import style from './Auth.module.css';
 import PropTypes from 'prop-types';
 import {ReactComponent as AuthLogo} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
+import {useAuth} from '../../../hooks/useAuth';
 
 export const Auth = ({token, delToken}) => {
-  const [auth, setAuth] = useState({});
+  const [auth, clearAuth] = useAuth(token);
   const [isExitBtn, setIsExitBtn] = useState(false);
 
   const handleExit = () => {
     delToken();
-    setAuth({});
+    clearAuth();
   };
-
-  useEffect(() => {
-    if (!token) return;
-
-    fetch(`${URL_API}/api/v1/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    })
-      .then(res => {
-        if (res.ok) return res.json();
-        if (res.status === 400 || res.status === 401) {
-          console.log(`Error with status ${res.status}`);
-          delToken();
-          return;
-        }
-      })
-      .then(({name, icon_img: iconImg}) => {
-        const img = iconImg.replace(/\?.*$/, '');
-        setAuth({name, img});
-      })
-      .catch((err) => {
-        console.err(err);
-        setAuth({});
-      });
-  }, [token]);
 
   return (
     <div className={style.container}>
