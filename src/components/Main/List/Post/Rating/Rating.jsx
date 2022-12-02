@@ -2,10 +2,7 @@ import React from 'react';
 import style from './Rating.module.css';
 import PropTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text';
-// font-weight: 700;
-// font-size: 12px;
-// line-height: 130%;
-// color: #8f8f8f;
+
 export const Rating = ({ups}) => {
   console.log();
   return (
