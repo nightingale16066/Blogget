@@ -1,11 +1,15 @@
 import React from 'react';
 import style from './UserPhoto.module.css';
-import notphoto from './img/notphoto.jpg';
+import PropTypes from 'prop-types';
 
 
-export const UserPhoto = (props) => {
+export const UserPhoto = ({thumbnail}) => {
   console.log();
   return (
-    <img className={style.img} src={notphoto} alt="title" />
+    <img className={style.img} src={thumbnail} alt="title" />
   );
+};
+
+UserPhoto.propTypes = {
+  thumbnail: PropTypes.string,
 };
