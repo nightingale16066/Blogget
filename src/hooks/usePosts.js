@@ -13,13 +13,16 @@ export const usePosts = () => {
       },
     })
       .then((response) => {
+        if (response.redirected) {
+          return [];
+        }
         if (response.status === 401) {
           throw new Error(response.status);
         }
         return response.json();
       })
       .then(({data}) => {
-        setPosts([...data.children]);
+        data && setPosts([...data.children]);
       })
       .catch((err) => {
         console.error(err);

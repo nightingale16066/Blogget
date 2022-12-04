@@ -5,7 +5,6 @@ import Post from './Post';
 
 export const List = () => {
   const {posts} = useContext(postsContext);
-  console.log('posts: ', posts);
 
   return (
     <ul className={style.list}>
