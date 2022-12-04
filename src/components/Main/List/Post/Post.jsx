@@ -9,11 +9,12 @@ import UserPhoto from './UserPhoto';
 
 
 export const Post = ({postData}) => {
-  const {title, author, ups, created, thumbnail} = postData;
+  const {title, author, ups, created,
+    thumbnail, selftext: markdown, id} = postData;
   return (
     <li className={style.post}>
       <UserPhoto thumbnail={thumbnail}/>
-      <Content title={title} author={author}/>
+      <Content title={title} author={author} id={id} markdown={markdown}/>
       <Rating ups={ups}/>
       <Time date={created}/>
       <Delete/>

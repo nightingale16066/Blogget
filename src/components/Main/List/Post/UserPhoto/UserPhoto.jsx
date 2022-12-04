@@ -1,12 +1,12 @@
 import React from 'react';
 import style from './UserPhoto.module.css';
 import PropTypes from 'prop-types';
-
+import notphoto from './img/notphoto.jpg';
 
 export const UserPhoto = ({thumbnail}) => {
-  console.log();
+  const photo = thumbnail.includes('http') ? thumbnail : notphoto;
   return (
-    <img className={style.img} src={thumbnail} alt="title" />
+    <img className={style.img} src={photo} alt="title" />
   );
 };
 
