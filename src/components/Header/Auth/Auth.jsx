@@ -4,16 +4,17 @@ import style from './Auth.module.css';
 import {ReactComponent as AuthLogo} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {tokenContext} from '../../../context/tokenContext';
 import {authContext} from '../../../context/authContext';
+import {useDispatch} from 'react-redux';
+import {deleteToken} from '../../../store';
 
 export const Auth = () => {
-  const {delToken} = useContext(tokenContext);
+  const dispatch = useDispatch();
   const [isExitBtn, setIsExitBtn] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
 
   const handleExit = () => {
-    delToken();
+    dispatch(deleteToken());
     clearAuth();
   };
 
