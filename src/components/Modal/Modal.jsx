@@ -8,10 +8,12 @@ import {useRef, useEffect} from 'react';
 import {useCommentsData} from '../../hooks/useCommentsData';
 import {Comments} from './Comments/Comments';
 import {FormComment} from './FormComment/FormComment';
+import {useSelector} from 'react-redux';
+import Loader from '../../UI/Loader';
 
 export const Modal = ({id, closeModal}) => {
-  const [[post, comments]] = useCommentsData(id);
-
+  const [post, comments] = useCommentsData(id);
+  const status = useSelector(state => state.comment.status);
   const overlayRef = useRef(null);
 
   const handleClick = e => {
@@ -38,8 +40,9 @@ export const Modal = ({id, closeModal}) => {
   return ReactDOM.createPortal(
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
-        {
-          !(post && comments) ? <p>Загрузка...</p> :
+        {status === 'loading' && <div className={style.wrapper}><Loader/></div>}
+        {status === 'error' && <p>Ошибка</p>}
+        {status === 'loaded' &&
           <>
             <h2 className={style.title}>{post.title}</h2>
             <div className={style.content}>

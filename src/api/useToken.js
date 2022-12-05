@@ -18,5 +18,5 @@ export const getToken = () => {
 
 export const delToken = () => {
   localStorage.removeItem('bearer');
-  location.href = location.href.replace(/(http:\/\/localhost:3000).*/, '$1');
+  // location.href = location.href.replace(/(http:\/\/localhost:3000).*/, '$1');
 };

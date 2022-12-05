@@ -6,10 +6,10 @@ import {useState} from 'react';
 import {useAuth} from '../../../hooks/useAuth';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {updateComment} from '../../../store';
+import {updateComment} from '../../../store/commentReducer';
 
 export const FormComment = () => {
-  const value = useSelector(state => state.comment);
+  const value = useSelector(state => state.comment.comment);
   const dispatch = useDispatch();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [auth] = useAuth();

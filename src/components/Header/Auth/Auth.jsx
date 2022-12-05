@@ -1,17 +1,18 @@
 import React from 'react';
-import {useState, useContext} from 'react';
+import {useState} from 'react';
 import style from './Auth.module.css';
 import {ReactComponent as AuthLogo} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {authContext} from '../../../context/authContext';
 import {useDispatch} from 'react-redux';
-import {deleteToken} from '../../../store';
+import {deleteToken} from '../../../store/tokenReducer';
+import {useAuth} from '../../../hooks/useAuth';
+import AuthLoader from '../../../UI/Loader';
 
 export const Auth = () => {
   const dispatch = useDispatch();
   const [isExitBtn, setIsExitBtn] = useState(false);
-  const {auth, clearAuth} = useContext(authContext);
+  const [auth, loading, clearAuth] = useAuth();
 
   const handleExit = () => {
     dispatch(deleteToken());
@@ -20,7 +21,7 @@ export const Auth = () => {
 
   return (
     <div className={style.container}>
-      {auth.name ? (
+      {loading ? (<AuthLoader/>) : auth.name ? (
         <>
           <button className={style.btn}
             onClick={() => setIsExitBtn(!isExitBtn)}>
