@@ -10,8 +10,11 @@ import {Comments} from './Comments/Comments';
 import {FormComment} from './FormComment/FormComment';
 import {useSelector} from 'react-redux';
 import Loader from '../../UI/Loader';
+import {useNavigate, useParams} from 'react-router-dom';
 
-export const Modal = ({id, closeModal}) => {
+export const Modal = () => {
+  const {id, page} = useParams();
+  const navigate = useNavigate();
   const [post, comments] = useCommentsData(id);
   const status = useSelector(state => state.comment.status);
   const overlayRef = useRef(null);
@@ -19,12 +22,12 @@ export const Modal = ({id, closeModal}) => {
   const handleClick = e => {
     const target = e.target;
     if (target === overlayRef.current) {
-      closeModal();
+      navigate(`/category/${page}`);
     }
   };
 
   const handleEscapeBtn = e => {
-    e.keyCode === 27 && closeModal();
+    e.keyCode === 27 && navigate(`/category/${page}`);
   };
 
   useEffect(() => {
@@ -64,7 +67,8 @@ export const Modal = ({id, closeModal}) => {
           </>
         }
 
-        <button className={style.close} onClick={() => closeModal()}>
+        <button className={style.close}
+          onClick={() => navigate(`/category/${page}`)}>
           <CloseIcon/>
         </button>
       </div>
