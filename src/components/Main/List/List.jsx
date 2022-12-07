@@ -7,6 +7,7 @@ import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {postsRequestAsync} from '../../../store/posts/postAction';
 import {Outlet, useParams} from 'react-router-dom';
+import {postsSlice} from '../../../store/posts/postSlice';
 
 export const List = () => {
   const posts = useSelector(state => state.posts.posts);
@@ -21,11 +22,12 @@ export const List = () => {
   };
 
   useEffect(() => {
-    dispatch(postsRequestAsync(page));
+    dispatch(postsSlice.actions.changePage({page}));
+    dispatch(postsRequestAsync());
   }, [page]);
 
   useEffect(() => {
-    if (count >= 2) return;
+    if (count >= 2 && posts) return;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         dispatch(postsRequestAsync());
